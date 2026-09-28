@@ -6,8 +6,10 @@ By Mrudani Yayati Pethe
   Dining Behind Doors
 
  From Order to Bill: Understanding the Logic Behind Restaurant Billing Systems
+ Overview 
+ This project discusses understanding billing systems in resturants in slight detail. 
+ 
  Features
-
 - Display  of a restaurant menu
 
 - Create and modify orders with ease
@@ -54,20 +56,15 @@ Dining-Behind-Doors/
 
 ### Requirements
 
-Python 3.10+ recommended models .
+Python 3.10+ recommended  
 
-### Run
+How to play
 
-```bash
+Make sure you have python on your computer.
 
-python src/main.py
+Open the main.py file in IDLE or PyCharm.
 
-```
+Press the green play button or press F5.
 
-### Test
-
-```bash
-
-python -m unit test discover -s tests -v
-
-```
+Type numbers into the console when it asks you to pick a number.
+The numbers represent the food item and save their value 
