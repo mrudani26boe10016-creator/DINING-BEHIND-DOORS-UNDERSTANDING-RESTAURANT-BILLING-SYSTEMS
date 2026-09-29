@@ -34,9 +34,9 @@ while is_running:
         if choice == "1":
             price += 10
         print("Ice Cream: $8")
-            price += 10
+        price += 10
         print("Cold Drink: $6")
-            price += 10
+        price += 10 
         if choice == "1":
             price += 10 
    

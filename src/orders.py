@@ -22,17 +22,27 @@ def take_order():
             break
 
         # Check if item is available
-        if choice in menu:
-            quantity = int(input("Enter quantity: "))
+        
+    if choice in menu:
+        while True:
+            try:
+               quantity = int(input("Enter quantity: "))
 
-            if quantity > 0:
-                order.append((choice, quantity))
-                print("Item added to order.")
-            else:
-                print("Please enter a valid quantity.")
+               if quantity > 0:
+                   break
+               else:
+                   print("Please enter a quantity greater than 0.")
 
-        else:
-            print("Item not found. Please select from the menu.")
+
+            except ValueError:
+                   print("Please enter a valid number.")
+
+    if quantity > 0:
+        order.append((choice, quantity))
+        print("Item added to order.")
+    else:
+        print("Please enter a valid quantity.") 
+
 
     return order
 
