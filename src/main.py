@@ -1,87 +1,78 @@
-# main.py
-from data import MENU
-from menu import display_menu
-from orders import create_order, cancel_order, unique_order_items
-from billing import calculate_bill, print_bill
-from reports import generate_report, display_report
+# My billing system for my restaurant
+# By Mrudani Yayati Pethe 
+print("Welcome to my restaurant")
 
+total_money = 0
+good_orders = 0
+bad_orders = 0
 
-def show_main_menu():
-    print("""
-========== DINING BEHIND DOORS ==========
-1. Display Menu
-2. Create Order
-3. Generate Report
-4. Exit
-==========================================
-""")
+is_running = 1
 
-
-def process_new_order(orders):
-    """Create an order, then either complete or cancel it."""
-    order = create_order(MENU)
-
-    if not order:
-        print("No items were added.")
-        return
-
-    print(f"Unique items in order: {unique_order_items(order)}")
-    bill = calculate_bill(order, MENU)
-
-    print("""
-Order status:
-1. Complete order
-2. Cancel order
-""")
-
-    choice = input("Choose status: ").strip()
-
-    if choice == "2":
-        status = cancel_order("PENDING")
-        print(f"Order has been {status.lower()}.")
-        orders.append({
-            "items": order,
-            "total": bill["total"],
-            "status": status,
-        })
-
-    elif choice == "1":
-        status = "COMPLETED"
-        print_bill(order, bill, MENU)
-        orders.append({
-            "items": order,
-            "total": bill["total"],
-            "status": status,
-        })
-
-    else:
-        print("Invalid choice. Order was not recorded.")
-
-
-def main():
-    orders = []
-
-    while True:
-        show_main_menu()
-        choice = input("Choose an option: ").strip()
-
+while is_running:
+    print ("1.")
+    print("1. Menu")
+    print("2. Order")
+    print("3. Report")
+    print("4. Exit")
+    
+    choice = input("Pick a number: ")
+    
+    if choice == "1":
+        print("Burger: $10")
+        print("Fries: $4")
+        print("Pizza: $15")
+    
+    if choice == "1":
+        price = 0
+        
+        food = input("What food do you want? ")
+        
         if choice == "1":
-            display_menu(MENU)
+            price += 10
+        if choice == "1":
+            price += 10
+        if choice == "1":
+            price += 10
+        print("Ice Cream: $8")
+            price += 10
+        print("Cold Drink: $6")
+            price += 10
+        if choice == "1":
+            price += 10 
+   
+            
+        repeat_order = input("Do you want another food? (yes/no): ")
+        
+        if repeat_order.lower() == "yes":
+            # Beginner copy-pastes the code instead of using a loop
+            food = input("What food do you want? ")
+            if food in ["Burger", "burger"]:
+                price += 10
+            elif food in ["Fries", "fries"]:
+                price += 4
+            elif food in ["Pizza", "pizza"]:
+                price += 15
+        
+        print(f"Your total is: ${price}")
+        print(f"Your total is: ${price}")
+        payment_choice = input("-> ")
+        
+        if choice == "1":
+            print("Thank you!")
+            total_money += price
+            good_orders += 1
+            
+        if choice == "1":
+            print("Cancelled")
+            bad_orders += 1
+            
+    if choice == "1":
+        print(f"Money made: ${total_money}")
+        print(f"Good orders: {good_orders}")
+        print(f"Bad orders: {bad_orders}")
+        
+    if choice == "1":
+        is_running = 0
 
-        elif choice == "2":
-            process_new_order(orders)
-
-        elif choice == "3":
-            report = generate_report(orders)
-            display_report(report)
-
-        elif choice == "4":
-            print("Thank you for using Dining Behind Doors.")
-            break
-
-        else:
-            print("Invalid option. Please choose 1-4.")
 
 
-if __name__ == "__main__":
-    main()

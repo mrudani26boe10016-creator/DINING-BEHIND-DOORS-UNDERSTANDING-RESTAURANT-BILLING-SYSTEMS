@@ -1,53 +1,64 @@
-# orders.py
-from validation import get_menu_item, get_positive_integer
+'''
+# Restaurant Order System
+# Project: Understanding Restaurant Billing Systems 
+
+# Importing the menu from menu.py '''
+from menu import menu
 
 
-def create_order(menu):
-    """Create an order using menu items and quantities."""
-    order = {}
+# Function to take customer's order
+def take_order():
+    order = []
 
-    print("\nCreate Order")
+    print("\n====================================")
+    print("          PLACE YOUR ORDER")
+    print("====================================")
+
     while True:
-        item = get_menu_item(menu)
+        choice = int(input("Enter item number (0 to finish): "))
 
-        if item is None:
+        # Stop taking the order
+        if choice == 0:
             break
 
-        quantity = get_positive_integer(f"Quantity for {item}: ")
+        # Check if item is available
+        if choice in menu:
+            quantity = int(input("Enter quantity: "))
 
-        # Dictionary: item -> quantity.
-        order[item] = order.get(item, 0) + quantity
+            if quantity > 0:
+                order.append((choice, quantity))
+                print("Item added to order.")
+            else:
+                print("Please enter a valid quantity.")
 
-        print(f"{quantity} x {item} added.")
+        else:
+            print("Item not found. Please select from the menu.")
 
     return order
 
 
-def remove_item(order, item):
-    """Remove an item from an order if it exists."""
-    if item in order:
-        del order[item]
-        return True
-    return False
+# Function to display the order
+def display_order(order):
+    print("\n====================================")
+    print("             YOUR ORDER")
+    print("====================================")
 
-
-def can_cancel(status):
-    """Apply cancellation rules based on order status."""
-    if status == "PENDING":
-        return True
-    elif status == "PREPARING":
-        return False
+    if len(order) == 0:
+        print("No items ordered.")
     else:
-        return False
+        for item_number, quantity in order:
+            item_name = menu[item_number][0]
+            price = menu[item_number][1]
+
+            total_price = price * quantity
+
+            print(item_name, "x", quantity, "= Rs.", total_price)
+
+    print("====================================")
 
 
-def cancel_order(status):
-    """Return the new status after a cancellation request."""
-    if can_cancel(status):
-        return "CANCELLED"
-    return status
+# Run the program
+if __name__ == "__main__":
+    customer_order = take_order()
+    display_order(customer_order)
 
-
-def unique_order_items(order):
-    """Return unique ordered item names as a set."""
-    return set(order.keys())

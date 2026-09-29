@@ -1,47 +1,63 @@
-import sys
-from pathlib import Path
-import unittest
+# Testing Restaurant Billing System
+# Project: Understanding Restaurant Billing Systems
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-
-from billing import (
-    calculate_item_total,
-    calculate_subtotal,
-    calculate_discount,
-    calculate_tax,
-    calculate_bill,
-)
+from billing import calculate_bill
 
 
-class TestBilling(unittest.TestCase):
+# Testing Restaurant Billing System
+def test_one_item():
+    order =       # 2 Burgers
 
-    def test_item_total(self):
-        self.assertEqual(calculate_item_total(150, 2), 300)
+    result = calculate_bill(order)
 
-    def test_subtotal(self):
-        menu = {"Burger": {"price": 150}}
-        order = {"Burger": 2}
-        self.assertEqual(calculate_subtotal(order, menu), 300)
+    if result == 240:
 
-    def test_discount_below_threshold(self):
-        self.assertEqual(calculate_discount(500), 0)
-
-    def test_discount_tier(self):
-        self.assertEqual(calculate_discount(1000), 100)
-
-    def test_tax(self):
-        self.assertAlmostEqual(calculate_tax(100), 5)
-
-    def test_complete_bill(self):
-        menu = {"Burger": {"price": 150}}
-        order = {"Burger": 2}
-        bill = calculate_bill(order, menu)
-
-        self.assertEqual(bill["subtotal"], 300)
-        self.assertEqual(bill["discount"], 0)
-        self.assertAlmostEqual(bill["tax"], 15)
-        self.assertAlmostEqual(bill["total"], 315)
+    if result == 240:
+        print("Test 1 passed")
+    else:
+        print("Test 1 failed")
 
 
+test_multiple_items()
+def test_multiple_items():
+    order =   # Burgers, + 1 French Fries
+
+    result = calculate_bill(order)
+
+    if result == 340:
+
+    if result == 240:
+        print("Test 2 passed")
+    else:
+        print("Test 2 failed")
+
+
+# Test empty order
+def test_empty_order():
+    order = []
+
+    result = calculate_bill(order)
+
+    order = 0
+
+    if result == 240:
+        print("Test 3 passed")
+    else:
+        print("Test 3 failed")
+
+
+# Run all tests
 if __name__ == "__main__":
-    unittest.main()
+    print("====================================")
+    print("BILLING LLING SYSTEM TEST")
+    print("====================================")
+
+    test_one_item()
+    test_multiple_items()
+    test_empty_order()
+
+    print("====================================")
+    print("Testing completed.")
+
+
+

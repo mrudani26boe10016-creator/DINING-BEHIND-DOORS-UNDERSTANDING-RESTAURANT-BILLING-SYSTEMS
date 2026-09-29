@@ -1,40 +1,53 @@
 # reports.py
-def generate_report(orders):
-    """Generate a basic report from completed/cancelled order records."""
-    completed = 0
-    cancelled = 0
-    sales = 0.0
-    cancelled_value = 0.0
 
-    # Nested loop: outer loop processes orders; inner loop can process items.
-    for order_record in orders:
-        status = order_record["status"]
+# Restaurant Reports
+# Project: Understanding Restaurant Billing Systems
 
-        if status == "COMPLETED":
-            completed += 1
-            sales += order_record["total"]
-
-            for item, quantity in order_record["items"].items():
-                # This loop demonstrates item-level processing for reporting.
-                _ = item, quantity
-
-        elif status == "CANCELLED":
-            cancelled += 1
-            cancelled_value += order_record["total"]
-
-    return {
-        "completed_orders": completed,
-        "cancelled_orders": cancelled,
-        "sales": sales,
-        "cancelled_value": cancelled_value,
-    }
+# This list stores the bills made by customers
+bills = []
 
 
-def display_report(report):
-    """Display the report in a readable format."""
-    print("\n========== ORDER REPORT ==========")
-    print(f"Completed orders:       {report['completed_orders']}")
-    print(f"Cancelled orders:       {report['cancelled_orders']}")
-    print(f"Total sales:            ₹{report['sales']:.2f}")
-    print(f"Cancelled order value:  ₹{report['cancelled_value']:.2f}")
-    print("==================================")
+# Function to add a bill to the report
+def add_bill(amount):
+    bills.append(amount)
+
+
+# Function to calculate total sales
+def total_sales():
+    total = 0
+
+    for amount in bills:
+        total = total + amount
+
+    return total
+
+
+# Function to display the report
+def show_report():
+    print("\n====================================")
+    print("        RESTAURANT SALES REPORT")
+    print("====================================")
+
+    if len(bills) == 0:
+        print("No bills have been made yet.")
+    else:
+        print("Number of bills :", len(bills))
+
+        for i in range(len(bills)):
+            print("Bill", i + 1, ": Rs.", bills[i])
+
+        print("------------------------------------")
+        print("Total Sales     : Rs.", total_sales())
+
+    print("====================================")
+
+
+# Sample bills for testing
+if __name__ == "__main__":
+
+    add_bill(357)
+    add_bill(540)
+    add_bill(280)
+
+    show_report()
+
